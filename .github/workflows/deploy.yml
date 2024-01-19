@@ -41,6 +41,7 @@ jobs:
 
   notify:
     needs: [ build, deploy ]
+    if: always()
 
     runs-on: ubuntu-latest
     steps:
