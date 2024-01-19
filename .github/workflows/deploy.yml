@@ -10,20 +10,6 @@ jobs:
       matrix:
         node-version: [ 18.x ]
 
-    permissions:
-      actions: write
-      checks: write
-      contents: write
-      deployments: write
-      discussions: write
-      issues: write
-      packages: write
-      pull-requests: write
-      repository-projects: write
-      security-events: write
-      statuses: write
-      pages: write
-
     steps:
       # Инициализация
       - uses: actions/checkout@v3
@@ -38,6 +24,7 @@ jobs:
       - run: npm run lint
       - run: npm run build
 
+      # Деплой
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
