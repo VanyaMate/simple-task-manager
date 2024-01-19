@@ -22,6 +22,8 @@ jobs:
 
       # Тесты
       - run: npm run lint
+
+      # Сборка
       - run: npm run build
 
       # Деплой
