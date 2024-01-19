@@ -1,0 +1,27 @@
+$footer_height  : 40px;
+$content_offset : var(--offset-small);
+
+.container {
+
+    display         : flex;
+    flex-direction  : column;
+    justify-content : space-between;
+    align-items     : center;
+    height          : calc(100dvh - $content_offset * 2);
+    margin          : $content_offset;
+
+    .content {
+
+    }
+
+    .footer {
+        height          : $footer_height;
+        max-height      : $footer_height;
+        justify-content : center;
+        background      : var(--background-item);
+    }
+
+    .content_width {
+        width : var(--page-max-width);
+    }
+}

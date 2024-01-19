@@ -1,0 +1,40 @@
+.container {
+    display        : flex;
+    flex-direction : column;
+
+    &.extra_small {
+        gap : var(--offset-small);
+    }
+
+    &.small {
+        gap : var(--offset-medium);
+    }
+
+    &.medium {
+        gap : var(--offset-large);
+    }
+
+    &.large {
+        gap : var(--offset-large-plus);
+    }
+
+    &.item {
+        border-radius : var(--offset-medium);
+        padding       : var(--offset-medium);
+
+        &.default {
+            background : var(--background-main);
+            box-shadow : 0 0 10px 0 var(--background-main-transprent);
+        }
+
+        &.main {
+            background : var(--background-item);
+            box-shadow : 0 0 10px 0 var(--background-item-transprent);
+        }
+
+        &.second {
+            background : var(--background-second);
+            box-shadow : 0 0 10px 0 var(--background-second-transprent);
+        }
+    }
+}
