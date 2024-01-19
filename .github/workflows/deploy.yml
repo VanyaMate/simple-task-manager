@@ -36,18 +36,13 @@ jobs:
 
       # Тесты
       - run: npm run lint
+      - run: npm run build
 
-      # Деплой
-      - name: Deploy to GitHub Pages
-        run: |
-          npm run build
-          git config user.name github-actions[bot]
-          git config user.email github-actions[bot]@users.noreply.github.com
-          git checkout -b gh-pages
-          git add --force dist/
-          git commit -m "Deploy to GitHub Pages"
-          git push origin :gh-pages
-          git push -u origin gh-pages
+      - uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: '${{ secrets.GITHUB_TOKEN }}'
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_VM_MARKET_PLACE }}'
+          projectId: vm-market-place
 
       # Остальное
       # [Поменять после изменения нотификатора]
