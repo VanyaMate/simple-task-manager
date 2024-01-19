@@ -11,6 +11,7 @@ jobs:
       matrix:
         node-version: [ 18.x ]
     steps:
+      # Инициализация
       - uses: actions/checkout@v3
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
@@ -18,9 +19,15 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
       - run: npm i
+
+      # Тесты
       - run: npm run lint
-      # Тут будут так же тесты
+
+      # Деплой
+
+      # Остальное
       - name: Telegram notificator
+        if: always()
         uses: VanyaMate/github-action-telegram-notification@v0.20
         with:
           success: ${{ job.status }}
