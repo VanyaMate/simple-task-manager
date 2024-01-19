@@ -1,0 +1,28 @@
+name: Deploy
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [ 18.x ]
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+      - run: npm i
+      - run: npm run lint
+      # Тут будут так же тесты
+      - name: Telegram notificator
+        uses: VanyaMate/github-action-telegram-notification@v0.20
+        with:
+          success: ${{ job.status }}
+          tg_bot_token: ${{ secrets.TG_TOKEN_BOT }}
+          tg_chat_id: ${{ secrets.TG_CHAT_ID }}
