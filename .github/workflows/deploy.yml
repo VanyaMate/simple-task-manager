@@ -5,9 +5,11 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+
     strategy:
       matrix:
         node-version: [ 18.x ]
+
     steps:
       # Инициализация
       - uses: actions/checkout@v3
@@ -20,10 +22,28 @@ jobs:
 
       # Тесты
       - run: npm run lint
+  deploy:
+    needs: build
 
-      # Деплой
+    permissions:
+      pages: write
+      id-token: write
 
-      # Остальное
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+
+  notify:
+    needs: [ build, deploy ]
+
+    runs-on: ubuntu-latest
+    steps:
       - name: Telegram notificator
         if: always()
         uses: VanyaMate/github-action-telegram-notification@v0.20
