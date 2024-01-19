@@ -1,6 +1,6 @@
-name: Deploy
+name: Tests
 on:
-  push:
+  pull_request:
     branches: [ master ]
 jobs:
   build:
@@ -20,8 +20,6 @@ jobs:
 
       # Тесты
       - run: npm run lint
-
-      # Деплой
 
       # Остальное
       - name: Telegram notificator
