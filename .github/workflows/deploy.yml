@@ -23,7 +23,8 @@ jobs:
       # Тесты
       - run: npm run lint
 
-      # Остальное [Поменять после изменения нотификатора]
+      # Остальное
+      # [Поменять после изменения нотификатора]
       - name: Telegram notificator
         if: always()
         uses: VanyaMate/github-action-telegram-notification@v0.20
@@ -34,16 +35,15 @@ jobs:
   deploy:
     needs: build
 
-    permissions:
-      pages: write
-      id-token: write
-
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-
     runs-on: ubuntu-latest
     steps:
       - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v3
+        run: |
+          npm run build
+          git config --global user.email ${{ secrets.CICD_DEPLOY_BOT_EMAIL }}
+          git config --global user.name ${{ secrets.CICD_DEPLOY_BOT_NAME }}
+          git checkout -b gh-pages
+          git add --force dist/
+          git commit -m "Deploy to GitHub Pages"
+          git push origin :gh-pages
+          git push -u origin gh-pages
