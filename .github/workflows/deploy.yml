@@ -43,6 +43,7 @@ jobs:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_VM_MARKET_PLACE }}'
           projectId: vm-market-place
+          channelId: live
 
       # Остальное
       # [Поменять после изменения нотификатора]
