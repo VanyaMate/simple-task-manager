@@ -9,6 +9,8 @@ import { useTextInputsValidator } from '@/hooks/ui/inputs/useTextInputsValidator
 
 export type TodoCreateFormProps = {
     onCreate: (createData: CreateTodo) => void;
+    // todo: temp
+    // eslint-disable-next-line react/no-unused-prop-types
     process?: boolean;
 };
 
@@ -28,18 +30,18 @@ const TodoCreateForm: React.FC<TodoCreateFormProps> = (props) => {
     const activeButton: boolean                  = useTextInputsValidator(titleInput, descriptionInput);
 
     return (
-        <Section size={ 'small' }>
+        <Section size="small">
             <TextInput
                 controller={ titleInput }
-                label={ 'Заголовок задачи' }
-                placeholder={ 'Введите заголовок' }
+                label="Заголовок задачи"
+                placeholder="Введите заголовок"
             />
             <TextInput
                 controller={ descriptionInput }
-                label={ 'Описание задачи' }
-                placeholder={ 'Введите описание' }
+                label="Описание задачи"
+                placeholder="Введите описание"
             />
-            <Button styleType={ 'main' } disabled={ !activeButton } onClick={ () => {
+            <Button disabled={ !activeButton } onClick={ () => {
                 onCreate({
                     id         : Math.random().toString(),
                     title      : titleInput.currentValue,
@@ -47,7 +49,7 @@ const TodoCreateForm: React.FC<TodoCreateFormProps> = (props) => {
                     date       : new Date().toLocaleString(),
                     status     : false,
                 });
-            } }>Создать</Button>
+            } } styleType="main">Создать</Button>
         </Section>
     );
 };

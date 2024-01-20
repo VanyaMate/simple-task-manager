@@ -21,7 +21,7 @@ const TodoListContainer: React.FC<TodoListContainerProps> = (props) => {
      */
 
     return (
-        <Section size={ 'large' }>
+        <Section size="large">
             <TodoCreateForm
                 onCreate={ (data) => {
                     console.log(data);

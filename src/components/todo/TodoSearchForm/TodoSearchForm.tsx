@@ -27,12 +27,12 @@ const TodoSearchForm: React.FC<TodoSearchFormProps> = (props) => {
 
     return (
         <Section
-            size={ 'extra-small' }
+            size="extra-small"
         >
             <TextInput
                 controller={ searchInput }
-                label={ 'Поиск по задачам' }
-                placeholder={ 'Введите заголовок' }
+                label="Поиск по задачам"
+                placeholder="Введите заголовок"
             />
         </Section>
     );

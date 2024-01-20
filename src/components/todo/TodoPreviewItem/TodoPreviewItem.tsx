@@ -22,31 +22,29 @@ const TodoPreviewItem: React.FC<TodoItemProps> = (props) => {
 
     return (
         <Section
-            tag={ 'article' }
-            size={ 'extra-small' }
             className={ css.container }
+            size="extra-small"
+            tag="article"
         >
             {
-                extraPrefix &&
-                <Section type={ 'main' } className={ css.extra }>
+                extraPrefix ? <Section className={ css.extra } type="main">
                     { extraPrefix }
-                </Section>
+                </Section> : null
             }
             <Section
-                type={ 'main' }
-                size={ 'extra-small' }
                 className={ css.todo }
                 onClick={ onCardClickHandler }
+                size="extra-small"
+                type="main"
             >
                 <Title lines={ 2 }>{ todo.title }</Title>
-                <P lines={ 4 } type={ 'second' }>{ todo.description }</P>
-                <P type={ 'invisible' }>{ todo.date }</P>
+                <P lines={ 4 } type="second">{ todo.description }</P>
+                <P type="invisible">{ todo.date }</P>
             </Section>
             {
-                extraPostfix &&
-                <Section type={ 'main' } className={ css.extra }>
+                extraPostfix ? <Section className={ css.extra } type="main">
                     { extraPostfix }
-                </Section>
+                </Section> : null
             }
         </Section>
     );

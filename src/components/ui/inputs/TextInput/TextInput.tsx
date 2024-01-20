@@ -17,25 +17,23 @@ const TextInput: React.FC<TextInputProps> = (props) => {
 
     return (
         <Section
-            size={ 'extra-small' }
             className={ cn(css.container, controller.errorMessage && css.error) }
+            size="extra-small"
         >
             {
-                label &&
-                <P type={ 'invisible' } className={ css.label }>{ label }</P>
+                label ? <P className={ css.label } type="invisible">{ label }</P> : null
             }
             <input
-                value={ controller.showValue }
-                onChange={ (e) => controller.setValue(e.target.value) }
                 className={ css.input }
+                onChange={ (e) => controller.setValue(e.target.value) }
                 placeholder={ placeholder }
+                value={ controller.showValue }
             />
             {
-                controller.errorMessage &&
-                <P
-                    type={ 'second' }
+                controller.errorMessage ? <P
                     className={ css.message }
-                >{ controller.errorMessage }</P>
+                    type="second"
+                >{ controller.errorMessage }</P> : null
             }
         </Section>
     );

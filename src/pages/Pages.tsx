@@ -11,8 +11,8 @@ const Pages: React.FC<PagesProps> = (props) => {
 
     return (
         <Routes>
-            <Route path={ '/*' } element={ <PageLayout/> }>
-                <Route path={ '*' } element={ <HomePage/> }/>
+            <Route element={ <PageLayout/> } path={ '/*' }>
+                <Route element={ <HomePage/> } path="*"/>
             </Route>
         </Routes>
     );

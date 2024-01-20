@@ -21,9 +21,9 @@ const TodoList: React.FC<TodoListProps> = (props) => {
                 todos.map((todoItem) => (
                     <TodoPreviewItem
                         key={ todoItem.id }
-                        todo={ todoItem }
                         onCardClick={ () => {
                         } }
+                        todo={ todoItem }
                     />
                 ))
             }

@@ -15,7 +15,7 @@ const PageLayout: React.FC<PageLayoutProps> = (props) => {
             <div className={ cn(css.content, css.content_width) }>
                 <Outlet/>
             </div>
-            <Section type={ 'main' } className={ cn(css.footer, css.content_width) }>
+            <Section className={ cn(css.footer, css.content_width) } type="main">
                 footer
             </Section>
         </div>
