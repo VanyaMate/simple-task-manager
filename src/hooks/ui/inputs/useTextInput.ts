@@ -4,7 +4,8 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 export type TextInputValidator = (value: string) => string;
 
 export type UseTextInputProps = {
-    onChange: (value: string, errorMessage: string) => any;
+    onChange?: (value: string, errorMessage: string) => any;
+    required?: boolean;
     initialValue?: string;
     debounce?: number;
     validator?: TextInputValidator;
@@ -15,6 +16,7 @@ export interface ITextInputController {
     currentValue: string;
     setValue: (value: string) => void;
     process: boolean;
+    required: boolean;
     errorMessage: string;
 }
 
@@ -65,6 +67,11 @@ export const useTextInput = function (props: UseTextInputProps): ITextInputContr
     }, [ showValue, currentValue, props ]);
 
     return useMemo(() => ({
-        showValue, currentValue, setValue, process, errorMessage,
-    }), [ showValue, currentValue, setValue, process, errorMessage ]);
+        showValue,
+        currentValue,
+        setValue,
+        process,
+        errorMessage,
+        required: props.required ?? false,
+    }), [ showValue, currentValue, setValue, process, errorMessage, props.required ]);
 };

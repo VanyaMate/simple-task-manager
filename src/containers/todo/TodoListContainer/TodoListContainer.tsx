@@ -1,5 +1,7 @@
 import React from 'react';
 import TodoSearchForm from '@/components/todo/TodoSearchForm/TodoSearchForm.tsx';
+import TodoCreateForm from '@/components/todo/TodoCreateForm/TodoCreateForm.tsx';
+import Section from '@/components/ui/containers/Section/Section.tsx';
 
 
 export type TodoListContainerProps = {};
@@ -19,7 +21,12 @@ const TodoListContainer: React.FC<TodoListContainerProps> = (props) => {
      */
 
     return (
-        <div>
+        <Section size={ 'large' }>
+            <TodoCreateForm
+                onCreate={ (data) => {
+                    console.log(data);
+                } }
+            />
             <TodoSearchForm
                 onChange={ (value, errorMessage) => !errorMessage && console.log(value) }
             />
@@ -31,7 +38,7 @@ const TodoListContainer: React.FC<TodoListContainerProps> = (props) => {
                  *             // Pagination
                  */
             }
-        </div>
+        </Section>
     );
 };
 
