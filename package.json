@@ -10,7 +10,6 @@
         "preview": "vite preview"
     },
     "dependencies": {
-        "@types/react-router-dom": "^5.3.3",
         "@vanyamate/helpers": "^0.0.5",
         "@vanyamate/market-place-service": "^0.2.16",
         "react": "^18.2.0",
@@ -18,6 +17,7 @@
         "react-router-dom": "^6.21.3"
     },
     "devDependencies": {
+        "@types/react-router-dom": "^5.3.3",
         "@types/react": "^18.2.43",
         "@types/react-dom": "^18.2.17",
         "@typescript-eslint/eslint-plugin": "^6.14.0",
