@@ -8,7 +8,14 @@ module.exports = {
     ],
     ignorePatterns: ['dist', '.eslintrc.cjs'],
     parser: '@typescript-eslint/parser',
-    plugins: ['react-refresh'],
+    plugins: [
+        'react-refresh',
+        'import',
+        'n',
+        'promise',
+        'react',
+        'react-hooks',
+    ],
     rules: {
         'react-refresh/only-export-components': "off",
         "@typescript-eslint/no-explicit-any": "off",

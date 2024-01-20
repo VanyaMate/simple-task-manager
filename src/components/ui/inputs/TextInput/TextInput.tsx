@@ -32,8 +32,10 @@ const TextInput: React.FC<TextInputProps> = (props) => {
             />
             {
                 controller.errorMessage &&
-                <P type={ 'second' }
-                   className={ css.message }>{ controller.errorMessage }</P>
+                <P
+                    type={ 'second' }
+                    className={ css.message }
+                >{ controller.errorMessage }</P>
             }
         </Section>
     );
