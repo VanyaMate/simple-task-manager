@@ -1,4 +1,5 @@
 import React from 'react';
+import TodoSearchForm from '@/components/todo/TodoSearchForm/TodoSearchForm.tsx';
 
 
 export type TodoListContainerProps = {};
@@ -17,13 +18,19 @@ const TodoListContainer: React.FC<TodoListContainerProps> = (props) => {
      *  Так же там можно указать количество задач по фильтрам.
      */
 
-
     return (
         <div>
-            // TodoSearchForm
-            // TodoCreateForm
-            // TodoList
-            // Pagination
+            <TodoSearchForm
+                onChange={ (value, errorMessage) => !errorMessage && console.log(value) }
+            />
+            {
+                /**
+                 *             // TodoSearchForm
+                 *             // TodoCreateForm
+                 *             // TodoList
+                 *             // Pagination
+                 */
+            }
         </div>
     );
 };

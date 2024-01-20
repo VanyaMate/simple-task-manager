@@ -2,7 +2,6 @@ $footer_height  : 40px;
 $content_offset : var(--offset-small);
 
 .container {
-
     display         : flex;
     flex-direction  : column;
     justify-content : space-between;
@@ -22,6 +21,7 @@ $content_offset : var(--offset-small);
     }
 
     .content_width {
-        width : var(--page-max-width);
+        width     : 100%;
+        max-width : var(--page-max-width);
     }
 }

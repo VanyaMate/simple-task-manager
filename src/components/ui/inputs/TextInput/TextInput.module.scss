@@ -1,0 +1,37 @@
+.container {
+    .label {
+
+    }
+
+    .input {
+        outline       : none;
+        border        : 1px solid var(--border-color-invisible);
+        background    : var(--background-item);
+        color         : var(--text-color-main);
+        border-radius : var(--offset-medium);
+        height        : var(--height-medium);
+        padding       : var(--offset-medium);
+        transition    : var(--transition-fast);
+
+        &:hover {
+            box-shadow : 0 0 15px -10px var(--color-blue);
+        }
+
+        &:focus {
+            box-shadow : 0 0 20px -10px var(--color-blue);
+        }
+    }
+
+    .message {
+        color : var(--color-red);
+    }
+
+    &.error {
+        & .message {
+        }
+
+        & .input {
+            box-shadow : 0 0 20px -10px var(--color-red);
+        }
+    }
+}
