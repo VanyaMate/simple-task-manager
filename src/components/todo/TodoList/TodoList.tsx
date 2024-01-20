@@ -6,20 +6,10 @@ import { Todo } from '@/services/todo/todo.types.ts';
 
 export type TodoListProps = {
     todos: Todo[];
-    process: boolean;
-    error: string | null;
 };
 
 const TodoList: React.FC<TodoListProps> = (props) => {
-    const { process, error, todos } = props;
-
-    if (process) {
-        return 'loading';
-    }
-
-    if (error) {
-        return 'Error: ' + error;
-    }
+    const { todos } = props;
 
     if (!todos.length) {
         return 'not found';
