@@ -5,3 +5,6 @@ export type Todo = {
     date: string;
     status: boolean;
 }
+
+export type CreateTodo = Todo;
+export type UpdateTodo = Partial<Omit<Todo, 'id'>>;
