@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import { CreateTodo } from '@/services/todo/todo.types.ts';
 import Section from '@/components/ui/containers/Section/Section.tsx';
 import TextInput from '@/components/ui/inputs/TextInput/TextInput.tsx';
