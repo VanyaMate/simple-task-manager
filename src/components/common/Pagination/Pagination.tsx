@@ -2,7 +2,6 @@ import React, { useCallback, useEffect, useMemo, useState, MouseEvent } from 're
 import css from './Pagination.module.scss';
 import Button from '@/components/ui/buttons/Button/Button.tsx';
 import Section from '@/components/ui/containers/Section/Section.tsx';
-import Title from '@/components/ui/text/Title/Title.tsx';
 import P from '@/components/ui/text/P/P.tsx';
 
 

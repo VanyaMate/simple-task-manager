@@ -20,7 +20,7 @@ const TodoModalPreview: React.FC<TodoModalPreviewProps> = (props) => {
         <Section>
             <Title divider>{ todo.title }</Title>
             <Section>
-                <P type={ 'invisible' }>{ todo.date }</P>
+                <P type="invisible">{ todo.date }</P>
             </Section>
             <P>{ todo.description }</P>
         </Section>
