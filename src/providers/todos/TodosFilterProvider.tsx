@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import { Filter, TodosFilterContext } from '@/contexts/todos/TodosFilterContext.ts';
+import { TodosFilterContext } from '@/contexts/todos/TodosFilterContext.ts';
+import { Filter } from '@/services/service.types.ts';
+import { Todo } from '@/services/todo/todo.types.ts';
 
 
 export type TodosFilterProviderProps = {
@@ -8,7 +10,7 @@ export type TodosFilterProviderProps = {
 
 const TodosFilterProvider: React.FC<TodosFilterProviderProps> = (props) => {
     const { children }          = props;
-    const [ filter, setFilter ] = useState<Filter>({});
+    const [ filter, setFilter ] = useState<Filter<Todo>>({});
 
     return (
         <TodosFilterContext.Provider value={ { filter, setFilter } }>

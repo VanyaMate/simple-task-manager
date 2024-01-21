@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { Options, TodosOptionsContext } from '@/contexts/todos/TodosOptionsContext.ts';
+import { TodosOptionsContext } from '@/contexts/todos/TodosOptionsContext.ts';
 import { Todo } from '@/services/todo/todo.types.ts';
+import { Options } from '@/services/service.types.ts';
 
 
 export type TodosOptionsProviderProps = {
