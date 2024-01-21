@@ -7,6 +7,8 @@ import TodoList from '@/components/todo/TodoList/TodoList.tsx';
 import { CreateTodo } from '@/services/todo/todo.types.ts';
 import { useTodoActions } from '@/hooks/todo/useTodoActions.ts';
 import TodoPreviewItem from '@/components/todo/TodoPreviewItem/TodoPreviewItem.tsx';
+import Button from '@/components/ui/buttons/Button/Button.tsx';
+import IconM from '@/components/ui/icons/IconM/IconM.tsx';
 
 
 export type TodoListContainerProps = {};
@@ -31,9 +33,7 @@ const TodoListContainer: React.FC<TodoListContainerProps> = (props) => {
     return (
         <Section size="large">
             <TodoCreateForm
-                onCreate={ (data: CreateTodo) => {
-                    console.log(data);
-                } }
+                onCreate={ create }
             />
             <TodoSearchForm
                 onChange={ (value, errorMessage) => !errorMessage && console.log(value) }
@@ -42,6 +42,28 @@ const TodoListContainer: React.FC<TodoListContainerProps> = (props) => {
                 {
                     todos.map((todo) => (
                         <TodoPreviewItem
+                            extraPostfix={
+                                <Button
+                                    block
+                                    styleType="danger"
+                                    onClick={ () => {
+                                        remove(todo.id);
+                                    } }
+                                >
+                                    <IconM>delete</IconM>
+                                </Button>
+                            }
+                            extraPrefix={
+                                <Button
+                                    block
+                                    onClick={ () => {
+                                        update(todo.id, { status: !todo.status });
+                                    } }
+                                    styleType={ todo.status ? 'main' : 'default' }
+                                >
+                                    <IconM>check</IconM>
+                                </Button>
+                            }
                             key={ todo.id }
                             todo={ todo }
                         />

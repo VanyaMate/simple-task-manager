@@ -6,7 +6,7 @@ $content_offset : var(--offset-small);
     flex-direction  : column;
     justify-content : space-between;
     align-items     : center;
-    height          : calc(100dvh - $content_offset * 2);
+    min-height      : calc(100dvh - $content_offset * 2);
     margin          : $content_offset;
     gap             : var(--offset-medium);
 
