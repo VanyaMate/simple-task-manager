@@ -3,11 +3,8 @@ import TodoSearchForm from '@/components/todo/TodoSearchForm/TodoSearchForm.tsx'
 import TodoCreateForm from '@/components/todo/TodoCreateForm/TodoCreateForm.tsx';
 import Section from '@/components/ui/containers/Section/Section.tsx';
 import { TodosContext } from '@/contexts/todos/TodosContext.ts';
-import TodoList from '@/components/todo/TodoList/TodoList.tsx';
-import { CreateTodo } from '@/services/todo/todo.types.ts';
 import { useTodoActions } from '@/hooks/todo/useTodoActions.ts';
 import TodoPreviewItem from '@/components/todo/TodoPreviewItem/TodoPreviewItem.tsx';
-import Button from '@/components/ui/buttons/Button/Button.tsx';
 import IconM from '@/components/ui/icons/IconM/IconM.tsx';
 import FetchButton from '@/components/ui/buttons/FetchButton/FetchButton.tsx';
 
@@ -39,7 +36,7 @@ const TodoListContainer: React.FC<TodoListContainerProps> = (props) => {
             <TodoSearchForm
                 onChange={ (value, errorMessage) => !errorMessage && console.log(value) }
             />
-            <Section className={ pending ? 'loading' : '' }>
+            <Section className={ pending ? 'pending-container' : '' }>
                 {
                     todos.map((todo) => (
                         <TodoPreviewItem
@@ -55,8 +52,8 @@ const TodoListContainer: React.FC<TodoListContainerProps> = (props) => {
                                 <FetchButton
                                     block
                                     onClick={ () => update(todo.id, { status: !todo.status }) }
-                                    styleType={ todo.status ? 'main' : 'default' }
                                     prefix={ <IconM>check</IconM> }
+                                    styleType={ todo.status ? 'main' : 'default' }
                                 />
                             }
                             key={ todo.id }

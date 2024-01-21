@@ -1,6 +1,6 @@
 import React from 'react';
 import css from './PageLayout.module.scss';
-import { Link, Outlet } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 import Section from '@/components/ui/containers/Section/Section.tsx';
 import { cn } from '@vanyamate/helpers/react/classname';
 import Title from '@/components/ui/text/Title/Title.tsx';

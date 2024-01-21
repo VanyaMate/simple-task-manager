@@ -3,15 +3,13 @@ import { CreateTodo } from '@/services/todo/todo.types.ts';
 import Section from '@/components/ui/containers/Section/Section.tsx';
 import TextInput from '@/components/ui/inputs/TextInput/TextInput.tsx';
 import { ITextInputController, useTextInput } from '@/hooks/ui/inputs/useTextInput.ts';
-import Button from '@/components/ui/buttons/Button/Button.tsx';
 import { useTextInputsValidator } from '@/hooks/ui/inputs/useTextInputsValidator.ts';
+import FetchButton from '@/components/ui/buttons/FetchButton/FetchButton.tsx';
+import IconM from '@/components/ui/icons/IconM/IconM.tsx';
 
 
 export type TodoCreateFormProps = {
-    onCreate: (createData: CreateTodo) => void;
-    // todo: temp
-    // eslint-disable-next-line react/no-unused-prop-types
-    process?: boolean;
+    onCreate: (createData: CreateTodo) => Promise<any>;
 };
 
 const TodoCreateForm: React.FC<TodoCreateFormProps> = (props) => {
@@ -41,15 +39,26 @@ const TodoCreateForm: React.FC<TodoCreateFormProps> = (props) => {
                 label="Описание задачи"
                 placeholder="Введите описание"
             />
-            <Button disabled={ !activeButton } onClick={ () => {
-                onCreate({
-                    id         : Math.random().toString(),
-                    title      : titleInput.currentValue,
-                    description: descriptionInput.currentValue,
-                    date       : new Date().toLocaleString(),
-                    status     : false,
-                });
-            } } styleType="main">Создать</Button>
+            <FetchButton
+                disabled={ !activeButton }
+                onClick={ () =>
+                    onCreate({
+                        id         : Math.random().toString(),
+                        title      : titleInput.currentValue,
+                        description: descriptionInput.currentValue,
+                        date       : new Date().toLocaleString(),
+                        status     : false,
+                    })
+                        .then(() => {
+                            titleInput.setValue('');
+                            descriptionInput.setValue('');
+                        })
+                }
+                prefix={ <IconM>check</IconM> }
+                styleType="main"
+            >
+                Создать
+            </FetchButton>
         </Section>
     );
 };

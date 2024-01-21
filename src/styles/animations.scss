@@ -1,8 +1,33 @@
 @keyframes rotate360 {
     0% {
-        transform: rotate(0deg);
+        transform : rotate(0deg);
     }
     100% {
-        transform: rotate(360deg);
+        transform : rotate(360deg);
+    }
+}
+
+@keyframes pending-opacity {
+    0% {
+        opacity : 1;
+    }
+    50% {
+        opacity : .6;
+    }
+    100% {
+        opacity : 1;
+    }
+}
+
+:root {
+    .pending-container {
+        // Ну тут надо какую нибудь анимацию сделать. А эта мне не нравится
+        // animation      : pending-opacity .4s infinite ease-in-out;
+
+        & * {
+            pointer-events : none !important;
+        }
+
+        pointer-events : none !important;
     }
 }
