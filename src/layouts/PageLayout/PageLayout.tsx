@@ -1,8 +1,10 @@
 import React from 'react';
 import css from './PageLayout.module.scss';
-import { Outlet } from 'react-router-dom';
+import { Link, Outlet } from 'react-router-dom';
 import Section from '@/components/ui/containers/Section/Section.tsx';
 import { cn } from '@vanyamate/helpers/react/classname';
+import Title from '@/components/ui/text/Title/Title.tsx';
+import P from '@/components/ui/text/P/P.tsx';
 
 
 export type PageLayoutProps = {};
@@ -12,11 +14,17 @@ const PageLayout: React.FC<PageLayoutProps> = (props) => {
 
     return (
         <div className={ css.container }>
-            <div className={ cn(css.content, css.content_width) }>
+            <Section className={ cn(css.content, css.content_width) }>
+                <Section size="extra-small" type="main">
+                    <Title size="medium">Simple task manager</Title>
+                    <P type="invisible">TypeScript, React</P>
+                </Section>
                 <Outlet/>
-            </div>
+            </Section>
             <Section className={ cn(css.footer, css.content_width) } type="main">
-                footer
+                <P type="invisible">
+                    Footer
+                </P>
             </Section>
         </div>
     );

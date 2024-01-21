@@ -14,7 +14,7 @@ export type ButtonType =
 export type ButtonProps = {
     prefix?: React.ReactNode | string;
     postfix?: React.ReactNode | string;
-    children: React.ReactNode | string;
+    children?: React.ReactNode | string;
     styleType?: ButtonType;
     onClick?: () => any;
     block?: boolean;
@@ -57,7 +57,9 @@ const Button: React.FC<ButtonProps> = (props) => {
             {
                 prefix ? <span>{ prefix }</span> : null
             }
-            <span>{ children }</span>
+            {
+                children ? <span>{ children }</span> : null
+            }
             {
                 postfix ? <span>{ postfix }</span> : null
             }

@@ -14,9 +14,15 @@ export class SingleTodoLocalService extends SingleService<Todo, CreateTodo, Upda
             new StorageService(localStorage, LS_TODOS_SERVICE_STORAGE),
             new LocalStorageTodoServiceDataGenerator(),
             {
+                update : {
+                    timeout: 1000,
+                },
+                delete : {
+                    timeout: 700,
+                },
                 options: {
                     pk     : 'id',
-                    timeout: 100,
+                    timeout: 300,
                 },
             },
         );

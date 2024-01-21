@@ -9,6 +9,7 @@ import { useTodoActions } from '@/hooks/todo/useTodoActions.ts';
 import TodoPreviewItem from '@/components/todo/TodoPreviewItem/TodoPreviewItem.tsx';
 import Button from '@/components/ui/buttons/Button/Button.tsx';
 import IconM from '@/components/ui/icons/IconM/IconM.tsx';
+import FetchButton from '@/components/ui/buttons/FetchButton/FetchButton.tsx';
 
 
 export type TodoListContainerProps = {};
@@ -38,31 +39,25 @@ const TodoListContainer: React.FC<TodoListContainerProps> = (props) => {
             <TodoSearchForm
                 onChange={ (value, errorMessage) => !errorMessage && console.log(value) }
             />
-            <Section>
+            <Section className={ pending ? 'loading' : '' }>
                 {
                     todos.map((todo) => (
                         <TodoPreviewItem
                             extraPostfix={
-                                <Button
+                                <FetchButton
                                     block
+                                    onClick={ () => remove(todo.id) }
+                                    prefix={ <IconM>delete</IconM> }
                                     styleType="danger"
-                                    onClick={ () => {
-                                        remove(todo.id);
-                                    } }
-                                >
-                                    <IconM>delete</IconM>
-                                </Button>
+                                />
                             }
                             extraPrefix={
-                                <Button
+                                <FetchButton
                                     block
-                                    onClick={ () => {
-                                        update(todo.id, { status: !todo.status });
-                                    } }
+                                    onClick={ () => update(todo.id, { status: !todo.status }) }
                                     styleType={ todo.status ? 'main' : 'default' }
-                                >
-                                    <IconM>check</IconM>
-                                </Button>
+                                    prefix={ <IconM>check</IconM> }
+                                />
                             }
                             key={ todo.id }
                             todo={ todo }
