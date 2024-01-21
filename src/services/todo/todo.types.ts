@@ -6,5 +6,7 @@ export type Todo = {
     status: boolean;
 }
 
-export type CreateTodo = Todo;
+export type CreateTodo =
+    Omit<Todo, 'date' | 'description' | 'status'>
+    & Partial<Pick<Todo, 'date' | 'description' | 'status'>>;
 export type UpdateTodo = Partial<Omit<Todo, 'id'>>;

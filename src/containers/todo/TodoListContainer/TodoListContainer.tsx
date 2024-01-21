@@ -1,13 +1,15 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import TodoSearchForm from '@/components/todo/TodoSearchForm/TodoSearchForm.tsx';
 import TodoCreateForm from '@/components/todo/TodoCreateForm/TodoCreateForm.tsx';
 import Section from '@/components/ui/containers/Section/Section.tsx';
+import { TodosContext } from '@/contexts/todos/TodosContext.ts';
+import TodoList from '@/components/todo/TodoList/TodoList.tsx';
 
 
 export type TodoListContainerProps = {};
 
 const TodoListContainer: React.FC<TodoListContainerProps> = (props) => {
-    const {} = props;
+    const {}                                 = props;
     /**
      *  Можно сделать через ContextProvider-ы.
      *  Будет 3 контекста.

@@ -1,12 +1,7 @@
 import React, { createContext } from 'react';
 import { Todo } from '@/services/todo/todo.types.ts';
+import { Options } from '@/services/service.types.ts';
 
-
-export type Options<Type> = {
-    limit: number;
-    offset: number;
-    sort: [ keyof Type, 'asc' | 'desc' ] | []
-}
 
 export type TodosOptionsContextType = {
     options: Options<Todo>,
