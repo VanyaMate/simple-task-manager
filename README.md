@@ -76,6 +76,11 @@
 
 ## Запуск проекта локально
 
+```
+git clone https://github.com/VanyaMate/simple-task-manager.git
+npm i
+```
+
 `npm run dev` - запустить проект
 
 `npm run lint` - запуск линтера
