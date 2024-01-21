@@ -22,7 +22,7 @@
 :root {
     .pending-container {
         // Ну тут надо какую нибудь анимацию сделать. А эта мне не нравится
-        // animation      : pending-opacity .4s infinite ease-in-out;
+        animation      : pending-opacity .4s infinite ease-in-out;
 
         & * {
             pointer-events : none !important;

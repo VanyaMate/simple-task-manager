@@ -11,12 +11,13 @@ import { Todo } from '@/services/todo/todo.types.ts';
 import { useWindowPopupController } from '@/hooks/ui/popup/useWindowPopupController.tsx';
 import WindowPopup from '@/components/ui/popup/WindowPopup/WindowPopup.tsx';
 import TodoModalPreview from '@/components/todo/TodoModalPreview/TodoModalPreview.tsx';
+import { TodosFilterContext } from '@/contexts/todos/TodosFilterContext.ts';
 
 
 export type TodoListContainerProps = {};
 
 const TodoListContainer: React.FC<TodoListContainerProps> = (props) => {
-    const {}                         = props;
+    const {}            = props;
     /**
      *  Можно сделать через ContextProvider-ы.
      *  Будет 3 контекста.
@@ -28,6 +29,8 @@ const TodoListContainer: React.FC<TodoListContainerProps> = (props) => {
      *  Так же в списке задач будет process и error.
      *  Так же там можно указать количество задач по фильтрам.
      */
+
+    const { setFilter } = useContext(TodosFilterContext);
 
     const { todos, pending, count }  = useContext(TodosContext);
     const { create, update, remove } = useTodoActions();
@@ -48,7 +51,13 @@ const TodoListContainer: React.FC<TodoListContainerProps> = (props) => {
                 onCreate={ create }
             />
             <TodoSearchForm
-                onChange={ (value, errorMessage) => !errorMessage && console.log(value) }
+                onChange={ (value, errorMessage) => !errorMessage && setFilter((prev) => ({
+                    ...prev,
+                    title: {
+                        type: 'match',
+                        value,
+                    },
+                })) }
             />
             <Section className={ pending ? 'pending-container' : '' }>
                 {

@@ -13,7 +13,7 @@ export class MultiplyTodoLocalService extends MultiplyService<Todo> {
                 options: {
                     findOneFilter       : (todo: Todo, id: string) => todo.id === id,
                     maxOperationsPerStep: 10,
-                    timeout             : 150,
+                    timeout             : 250,
                     items               : [],
                 },
             },
