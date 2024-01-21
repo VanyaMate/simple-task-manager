@@ -5,12 +5,14 @@ import Section from '@/components/ui/containers/Section/Section.tsx';
 import { TodosContext } from '@/contexts/todos/TodosContext.ts';
 import TodoList from '@/components/todo/TodoList/TodoList.tsx';
 import { CreateTodo } from '@/services/todo/todo.types.ts';
+import { useTodoActions } from '@/hooks/todo/useTodoActions.ts';
+import TodoPreviewItem from '@/components/todo/TodoPreviewItem/TodoPreviewItem.tsx';
 
 
 export type TodoListContainerProps = {};
 
 const TodoListContainer: React.FC<TodoListContainerProps> = (props) => {
-    const {}        = props;
+    const {}                         = props;
     /**
      *  Можно сделать через ContextProvider-ы.
      *  Будет 3 контекста.
@@ -23,7 +25,8 @@ const TodoListContainer: React.FC<TodoListContainerProps> = (props) => {
      *  Так же там можно указать количество задач по фильтрам.
      */
 
-    const { todos } = useContext(TodosContext);
+    const { todos, pending, count }  = useContext(TodosContext);
+    const { create, update, remove } = useTodoActions();
 
     return (
         <Section size="large">
@@ -35,7 +38,16 @@ const TodoListContainer: React.FC<TodoListContainerProps> = (props) => {
             <TodoSearchForm
                 onChange={ (value, errorMessage) => !errorMessage && console.log(value) }
             />
-            <TodoList todos={ todos }/>
+            <Section>
+                {
+                    todos.map((todo) => (
+                        <TodoPreviewItem
+                            key={ todo.id }
+                            todo={ todo }
+                        />
+                    ))
+                }
+            </Section>
             {
                 /**
                  *             // TodoSearchForm

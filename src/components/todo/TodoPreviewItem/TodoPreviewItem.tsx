@@ -8,7 +8,7 @@ import Section from '@/components/ui/containers/Section/Section.tsx';
 
 export type TodoItemProps = {
     todo: Todo;
-    onCardClick: (todo: Todo) => any;
+    onCardClick?: (todo: Todo) => any;
     extraPrefix?: React.ReactNode;
     extraPostfix?: React.ReactNode;
 };
@@ -17,7 +17,7 @@ const TodoPreviewItem: React.FC<TodoItemProps> = (props) => {
     const { todo, onCardClick, extraPostfix, extraPrefix } = props;
 
     const onCardClickHandler = useCallback(() => {
-        onCardClick(todo);
+        onCardClick && onCardClick(todo);
     }, [ todo, onCardClick ]);
 
     return (
