@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { MouseEvent } from 'react';
 import css from './Button.module.scss';
 import { cn } from '@vanyamate/helpers/react/classname';
 
@@ -16,7 +16,7 @@ export type ButtonProps = {
     postfix?: React.ReactNode | string;
     children?: React.ReactNode | string;
     styleType?: ButtonType;
-    onClick?: () => any;
+    onClick?: (event: MouseEvent<HTMLButtonElement>) => any;
     block?: boolean;
     disabled?: boolean;
     quad?: boolean;

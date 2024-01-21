@@ -12,12 +12,15 @@ import { useWindowPopupController } from '@/hooks/ui/popup/useWindowPopupControl
 import WindowPopup from '@/components/ui/popup/WindowPopup/WindowPopup.tsx';
 import TodoModalPreview from '@/components/todo/TodoModalPreview/TodoModalPreview.tsx';
 import { TodosFilterContext } from '@/contexts/todos/TodosFilterContext.ts';
+import Pagination from '@/components/common/Pagination/Pagination.tsx';
+import { TodosOptionsContext } from '@/contexts/todos/TodosOptionsContext.ts';
+import TodoNotFound from '@/components/todo/TodoNotFound/TodoNotFound.tsx';
 
 
 export type TodoListContainerProps = {};
 
 const TodoListContainer: React.FC<TodoListContainerProps> = (props) => {
-    const {}            = props;
+    const {}                      = props;
     /**
      *  Можно сделать через ContextProvider-ы.
      *  Будет 3 контекста.
@@ -30,7 +33,8 @@ const TodoListContainer: React.FC<TodoListContainerProps> = (props) => {
      *  Так же там можно указать количество задач по фильтрам.
      */
 
-    const { setFilter } = useContext(TodosFilterContext);
+    const { setFilter }           = useContext(TodosFilterContext);
+    const { options, setOptions } = useContext(TodosOptionsContext);
 
     const { todos, pending, count }  = useContext(TodosContext);
     const { create, update, remove } = useTodoActions();
@@ -42,6 +46,10 @@ const TodoListContainer: React.FC<TodoListContainerProps> = (props) => {
         todoModalController.open();
     }, [ setSelectedTodo, todoModalController ]);
 
+    const onPageChangeHandler = useCallback((page: number, offset: number) => {
+        setOptions((prev) => ({ ...prev, offset }));
+    }, [ setOptions ]);
+
     return (
         <Section size="large">
             <WindowPopup controller={ todoModalController }>
@@ -50,50 +58,55 @@ const TodoListContainer: React.FC<TodoListContainerProps> = (props) => {
             <TodoCreateForm
                 onCreate={ create }
             />
-            <TodoSearchForm
-                onChange={ (value, errorMessage) => !errorMessage && setFilter((prev) => ({
-                    ...prev,
-                    title: {
-                        type: 'match',
-                        value,
-                    },
-                })) }
-            />
-            <Section className={ pending ? 'pending-container' : '' }>
-                {
-                    todos.map((todo) => (
-                        <TodoPreviewItem
-                            extraPostfix={
-                                <FetchButton
-                                    block
-                                    onClick={ () => remove(todo.id) }
-                                    prefix={ <IconM>delete</IconM> }
-                                    styleType="danger"
-                                />
-                            }
-                            extraPrefix={
-                                <FetchButton
-                                    block
-                                    onClick={ () => update(todo.id, { status: !todo.status }) }
-                                    prefix={ <IconM>check</IconM> }
-                                    styleType={ todo.status ? 'main' : 'default' }
-                                />
-                            }
-                            key={ todo.id }
-                            onCardClick={ onCardClickHandler }
-                            todo={ todo }
-                        />
-                    ))
-                }
+            <Section>
+                <TodoSearchForm
+                    onChange={ (value, errorMessage) => !errorMessage && setFilter((prev) => ({
+                        ...prev,
+                        title: {
+                            type: 'match',
+                            value,
+                        },
+                    })) }
+                />
             </Section>
-            {
-                /**
-                 *             // TodoSearchForm
-                 *             // TodoCreateForm
-                 *             // TodoList
-                 *             // Pagination
-                 */
-            }
+            <Section>
+                <Pagination
+                    amount={ count }
+                    initialPage={ 1 }
+                    limit={ options.limit }
+                    onPageChange={ onPageChangeHandler }
+                />
+                <Section className={ pending ? 'pending-container' : '' }>
+                    {
+                        todos.length ?
+                        todos.map((todo) => (
+                            <TodoPreviewItem
+                                extraPostfix={
+                                    <FetchButton
+                                        onClick={ () => remove(todo.id) }
+                                        prefix={ <IconM>delete</IconM> }
+                                        quad
+                                        styleType="danger"
+                                    />
+                                }
+                                extraPrefix={
+                                    <FetchButton
+                                        onClick={ () => update(todo.id, { status: !todo.status }) }
+                                        prefix={ <IconM>{ todo.status ? 'check'
+                                                                      : 'remove' }</IconM> }
+                                        quad
+                                        styleType={ todo.status ? 'main' : 'default' }
+                                    />
+                                }
+                                key={ todo.id }
+                                onCardClick={ onCardClickHandler }
+                                todo={ todo }
+                            />
+                        ))
+                                     : <TodoNotFound/>
+                    }
+                </Section>
+            </Section>
         </Section>
     );
 };
