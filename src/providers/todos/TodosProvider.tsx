@@ -1,5 +1,5 @@
-import React, { useCallback, useContext, useEffect, useState } from 'react';
-import { CreateTodo, Todo } from '@/services/todo/todo.types.ts';
+import React, { useContext, useEffect, useState } from 'react';
+import { Todo } from '@/services/todo/todo.types.ts';
 import { ITodoService } from '@/services/todo/todo-service.interface.ts';
 import { TodosContext } from '@/contexts/todos/TodosContext.ts';
 import { TodosFilterContext } from '@/contexts/todos/TodosFilterContext.ts';
@@ -20,13 +20,11 @@ const TodosProvider: React.FC<TodosProviderProps> = (props) => {
 
     // Получить фильтры
     // Получить опции для поиска
-    const { filter }              = useContext(TodosFilterContext);
-    const { options, setOptions } = useContext(TodosOptionsContext);
+    const { filter }  = useContext(TodosFilterContext);
+    const { options } = useContext(TodosOptionsContext);
 
     useEffect(() => {
         setPending(true);
-        setTodos([]);
-        setCount(0);
         // query
         service
             .findMany(filter, options)
@@ -34,24 +32,15 @@ const TodosProvider: React.FC<TodosProviderProps> = (props) => {
                 setTodos(response.items);
                 setCount(response.count);
             })
+            .catch(() => {
+                setTodos([]);
+                setCount(0);
+            })
             .finally(() => setPending(false));
     }, [ service, filter, options ]);
 
-    const addTodo = useCallback(async (createTodo: CreateTodo) => {
-        /**
-         * Выглядит как то, что тут явно лишнее. Но как будто для такого проекта допустимо
-         */
-        return service
-            .create(createTodo)
-            .then(() => setOptions((prev) => ({
-                ...prev, sort: [ 'date', 'desc' ], offset: 0,
-            })))
-            .then(() => '')
-            .catch((e) => e.message);
-    }, [ service, setOptions ]);
-
     return (
-        <TodosContext.Provider value={ { todos, count, pending, addTodo } }>
+        <TodosContext.Provider value={ { todos, count, pending } }>
             { children }
         </TodosContext.Provider>
     );
