@@ -1,7 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { TodosOptionsContext } from '@/contexts/todos/TodosOptionsContext.ts';
 import { Todo } from '@/services/todo/todo.types.ts';
 import { Options } from '@/services/service.types.ts';
+import {
+    LS_OPTIONS_PROVIDER,
+} from '@/providers/todos/local-storage-names.ts';
 
 
 export type TodosOptionsProviderProps = {
@@ -10,11 +13,13 @@ export type TodosOptionsProviderProps = {
 
 const TodosOptionsProvider: React.FC<TodosOptionsProviderProps> = (props) => {
     const { children }            = props;
-    const [ options, setOptions ] = useState<Options<Todo>>({
-        limit : 10,
-        offset: 0,
-        sort  : [],
-    });
+    const [ options, setOptions ] = useState<Options<Todo>>(
+        JSON.parse(localStorage.getItem(LS_OPTIONS_PROVIDER) ?? '{"limit":10,"offset":0,"sort":[]}'),
+    );
+
+    useEffect(() => {
+        localStorage.setItem(LS_OPTIONS_PROVIDER, JSON.stringify(options));
+    }, [ options ]);
 
     return (
         <TodosOptionsContext.Provider value={ { options, setOptions } }>
