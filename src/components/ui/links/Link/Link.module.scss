@@ -1,0 +1,16 @@
+.container {
+    color           : var(--text-color-link);
+    text-shadow     : 0 0 5px var(--color-blue-transparent);
+    text-decoration : none;
+    transition      : var(--transition-fast);
+
+    &:hover {
+        text-decoration : underline;
+        text-shadow     : 0 0 10px var(--color-gold-transparent);
+        color           : var(--text-color-link-hover);
+    }
+
+    &.small {
+        font-size : 12px;
+    }
+}

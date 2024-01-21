@@ -11,13 +11,20 @@ $content_offset : var(--offset-small);
     gap             : var(--offset-medium);
 
     .content {
-
+        .header {
+            display         : flex;
+            flex-direction  : row;
+            justify-content : space-between;
+            align-items     : center;
+        }
     }
 
     .footer {
+        flex-direction  : row;
+        justify-content : space-between;
+        align-items     : center;
         height          : $footer_height;
         max-height      : $footer_height;
-        justify-content : center;
         background      : var(--background-item);
     }
 
