@@ -15,6 +15,8 @@ import { TodosFilterContext } from '@/contexts/todos/TodosFilterContext.ts';
 import Pagination from '@/components/common/Pagination/Pagination.tsx';
 import { TodosOptionsContext } from '@/contexts/todos/TodosOptionsContext.ts';
 import TodoNotFound from '@/components/todo/TodoNotFound/TodoNotFound.tsx';
+import TodoSearchOptionsForm
+    from '@/components/todo/TodoSearchOptionsForm/TodoSearchOptionsForm.tsx';
 
 
 export type TodoListContainerProps = {};
@@ -33,7 +35,7 @@ const TodoListContainer: React.FC<TodoListContainerProps> = (props) => {
      *  Так же там можно указать количество задач по фильтрам.
      */
 
-    const { setFilter }           = useContext(TodosFilterContext);
+    const { filter, setFilter }   = useContext(TodosFilterContext);
     const { options, setOptions } = useContext(TodosOptionsContext);
 
     const { todos, pending, count }  = useContext(TodosContext);
@@ -60,13 +62,12 @@ const TodoListContainer: React.FC<TodoListContainerProps> = (props) => {
             />
             <Section>
                 <TodoSearchForm
-                    onChange={ (value, errorMessage) => !errorMessage && setFilter((prev) => ({
-                        ...prev,
-                        title: {
-                            type: 'match',
-                            value,
-                        },
-                    })) }
+                    filter={ filter }
+                    setFilter={ setFilter }
+                />
+                <TodoSearchOptionsForm
+                    options={ options }
+                    setOptions={ setOptions }
                 />
             </Section>
             <Section>
