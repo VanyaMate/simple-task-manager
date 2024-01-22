@@ -73,14 +73,14 @@ const TodoListContainer: React.FC<TodoListContainerProps> = (props) => {
             <Section>
                 <Pagination
                     amount={ count }
-                    initialPage={ 1 }
+                    initialPage={ Math.ceil(options.offset / options.limit) + 1 }
                     limit={ options.limit }
                     onPageChange={ onPageChangeHandler }
                 />
                 <Section className={ pending ? 'pending-container' : '' }>
                     {
-                        todos.length ?
-                        todos.map((todo) => (
+                        todos.length
+                        ? todos.map((todo) => (
                             <TodoPreviewItem
                                 extraPostfix={
                                     <FetchButton
@@ -104,7 +104,7 @@ const TodoListContainer: React.FC<TodoListContainerProps> = (props) => {
                                 todo={ todo }
                             />
                         ))
-                                     : <TodoNotFound/>
+                        : <TodoNotFound/>
                     }
                 </Section>
             </Section>

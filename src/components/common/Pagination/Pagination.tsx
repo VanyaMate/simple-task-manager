@@ -20,8 +20,16 @@ const Pagination: React.FC<PaginationProps> = (props) => {
     }, [ amount, limit ]);
 
     useEffect(() => {
-        setCurrentPage(initialPage ?? 1);
-    }, [ initialPage ]);
+        const maxPage: number = Math.ceil(amount / limit);
+        const page: number    = initialPage ?? 1;
+
+        if ((maxPage < page) && (maxPage > 0)) {
+            setCurrentPage(maxPage);
+            onPageChange(maxPage, limit * (maxPage - 1));
+        } else {
+            setCurrentPage(page);
+        }
+    }, [ amount, limit, initialPage, onPageChange ]);
 
     const onButtonClick = useCallback((event: MouseEvent<HTMLButtonElement>) => {
         const page: number = Number(event.currentTarget.textContent);
