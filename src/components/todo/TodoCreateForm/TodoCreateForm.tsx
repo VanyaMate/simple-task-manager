@@ -6,6 +6,7 @@ import { ITextInputController, useTextInput } from '@/hooks/ui/inputs/useTextInp
 import { useTextInputsValidator } from '@/hooks/ui/inputs/useTextInputsValidator.ts';
 import FetchButton from '@/components/ui/buttons/FetchButton/FetchButton.tsx';
 import IconM from '@/components/ui/icons/IconM/IconM.tsx';
+import Title from '@/components/ui/text/Title/Title.tsx';
 
 
 export type TodoCreateFormProps = {
@@ -28,7 +29,8 @@ const TodoCreateForm: React.FC<TodoCreateFormProps> = (props) => {
     const activeButton: boolean                  = useTextInputsValidator(titleInput, descriptionInput);
 
     return (
-        <Section size="small">
+        <Section size="small" type="main">
+            <Title>Создать задачу</Title>
             <TextInput
                 controller={ titleInput }
                 label="Заголовок задачи"

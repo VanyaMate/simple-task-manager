@@ -40,7 +40,7 @@ const Button: React.FC<ButtonProps> = (props) => {
         <button
             className={ cn(
                 css.container,
-                onClick && css.clickable,
+                (onClick && styleType !== 'selected') && css.clickable,
                 block && css.block,
                 className,
                 styleType === 'main' && css.main,

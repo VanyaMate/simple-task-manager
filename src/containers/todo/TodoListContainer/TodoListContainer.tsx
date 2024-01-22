@@ -23,18 +23,6 @@ export type TodoListContainerProps = {};
 
 const TodoListContainer: React.FC<TodoListContainerProps> = (props) => {
     const {}                      = props;
-    /**
-     *  Можно сделать через ContextProvider-ы.
-     *  Будет 3 контекста.
-     *  1. Фильтры
-     *  2. Опции
-     *  3. Список задач
-     *
-     *  При измении в фильтрах или опциях - получить список задач.
-     *  Так же в списке задач будет process и error.
-     *  Так же там можно указать количество задач по фильтрам.
-     */
-
     const { filter, setFilter }   = useContext(TodosFilterContext);
     const { options, setOptions } = useContext(TodosOptionsContext);
 
@@ -77,7 +65,7 @@ const TodoListContainer: React.FC<TodoListContainerProps> = (props) => {
                     limit={ options.limit }
                     onPageChange={ onPageChangeHandler }
                 />
-                <Section className={ pending ? 'pending-container' : '' }>
+                <Section className={ pending ? '' : '' }>
                     {
                         todos.length
                         ? todos.map((todo) => (

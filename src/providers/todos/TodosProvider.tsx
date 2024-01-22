@@ -1,5 +1,5 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { Todo } from '@/services/todo/todo.types.ts';
+import React, { useCallback, useContext, useEffect, useState } from 'react';
+import { Todo, UpdateTodo } from '@/services/todo/todo.types.ts';
 import { ITodoService } from '@/services/todo/todo-service.interface.ts';
 import { TodosContext } from '@/contexts/todos/TodosContext.ts';
 import { TodosFilterContext } from '@/contexts/todos/TodosFilterContext.ts';
@@ -17,6 +17,12 @@ const TodosProvider: React.FC<TodosProviderProps> = (props) => {
     const [ count, setCount ]     = useState<number>(0);
     const [ pending, setPending ] = useState<boolean>(false);
     const service: ITodoService   = useContext(ServiceTodosContext);
+
+    const updateTodo = useCallback((id: string, updateData: UpdateTodo) => {
+        setTodos((prev) => prev.map(
+            (todo) => todo.id === id ? { ...todo, ...updateData } : todo),
+        );
+    }, [ setTodos ]);
 
     // Получить фильтры
     // Получить опции для поиска
@@ -40,7 +46,7 @@ const TodosProvider: React.FC<TodosProviderProps> = (props) => {
     }, [ service, filter, options ]);
 
     return (
-        <TodosContext.Provider value={ { todos, count, pending } }>
+        <TodosContext.Provider value={ { todos, count, pending, updateTodo } }>
             { children }
         </TodosContext.Provider>
     );
